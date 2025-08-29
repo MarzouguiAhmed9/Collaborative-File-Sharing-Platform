@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  frontend:
+    image: ahmed20007/react:v4   # pull this from Docker Hub
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - sfmnet
+
+  backend:
+    image: ahmed20007/reactb:v1  # your backend image on Docker Hub
+    volumes:
+      - /mnt/efs:/mnt/efs
+    ports:
+      - "5001:5001"
+    networks:
+      - sfmnet
+
+networks:
+  sfmnet:
+    driver: bridge
